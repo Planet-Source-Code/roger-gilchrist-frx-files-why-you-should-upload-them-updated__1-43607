@@ -1,0 +1,129 @@
+﻿<div align="center">
+
+## FRX FILES WHY YOU SHOULD UPLOAD THEM \(updated\)
+
+
+</div>
+
+### Description
+
+Frx files are a vital part of almost any VB code but many people forget to upload them. This article explains how they work and why you should include them in your uploads. Article also in a zip file for reading off-line.
+ 
+### More Info
+ 
+
+
+<span>             |<span>
+---                |---
+**Submitted On**   |2003-04-27 06:09:34
+**By**             |[Roger Gilchrist](https://github.com/Planet-Source-Code/PSCIndex/blob/master/ByAuthor/roger-gilchrist.md)
+**Level**          |Beginner
+**User Rating**    |5.0 (25 globes from 5 users)
+**Compatibility**  |VB 3\.0, VB 4\.0 \(16\-bit\), VB 4\.0 \(32\-bit\), VB 5\.0, VB 6\.0, VB Script, ASP \(Active Server Pages\) , VBA MS Access, VBA MS Excel
+**Category**       |[Coding Standards](https://github.com/Planet-Source-Code/PSCIndex/blob/master/ByCategory/coding-standards__1-43.md)
+**World**          |[Visual Basic](https://github.com/Planet-Source-Code/PSCIndex/blob/master/ByWorld/visual-basic.md)
+**Archive File**   |[FRX\_FILES\_1580284282003\.zip](https://github.com/Planet-Source-Code/roger-gilchrist-frx-files-why-you-should-upload-them-updated__1-43607/archive/master.zip)
+
+
+
+
+
+### Source Code
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>FRX FILES</TITLE>
+</HEAD>
+<B><FONT FACE="Arial" SIZE=4><P>FRX FILES WHY YOU SHOULD UPLOAD THEM (Updated)</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>One of the most irritating things I have found in many uploads (at PSC and elsewhere) is that people leave out the FRX files. </P>
+<P>If you set any richtext, picture or icon properties of a Control in the IDE then VB automatically generates FRX files when you run the program in the IDE.
+The FRX file is named after the corresponding frm file.
+The FRX file contains a binary image of the richtext, picture or icon or at least a blank record position for a potential binary image (always in case of richtext, only if you load one for picture/icon). </P>
+<b><u>UPDATE</u></b>
+<p>
+<p><B>Dan Redding</B> adds that FRX's also contain:
+         -- Really long label captions -- The 'List' property of ListBoxes and ComboBoxes (if you type it in in the IDE properties window)
+<br>
+<B>Jim K</B> adds that UserControls have an equivalent file called CTX which serves the same purpose and UserDocuments have a DCA file
+</FONT><B><FONT FACE="Arial" SIZE=4><P>TERMS USED</B></FONT><FONT FACE="Arial" SIZE=2> (in case you are new to VB conventions)</P>
+<P>IDE&#9;&#9; Intergrated Development Environment. (VB to most of us)</P>
+<P>'Delete from IDE' Select the property (Text/Icon/Picture) in the Properties Window. Press [Del] button.</P>
+<P>'Cut' Use right-click menu or [Ctrl]+[C] to remove selected Control to Clipboard.</P>
+<P>'Paste'&#9;&#9; Use right-click menu or [Ctrl]+[V] to restore Control from clipboard.</P>
+<P>'Open/Close NotePad' Because you will be updating the contents of the frm file, you will have to open and close it repeatedly to see changes.</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>DEMONSTRATION</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Create a form with RichTextBox, PictureBox and Image controls. </P>
+<P>Run (and Save) code. </P>
+<P>Stop code. </P>
+<P>Open Explorer in project folder.</P>
+<P>Open the frm file in NotePad. </P>
+<P>You will see that the RichTextBox definition contains a line similar to this:</P>
+<P>TextRTF = $"Form1.frx":3A1EE8</P><DIR>
+<DIR>
+<P>This value has 4 parts </P>
+<P>1. '$' = Marker for external file reference (I assume)</P>
+<P>2. FRX filename (enclosed in quotes as a file name may have spaces)
+(The exact name of the file will be &lt;form_filename&gt; &amp; '.FRX' extention.)</P>
+<P>3. Separator character ':' </P>
+<P>4. Pointer to the data description in the FRX file.
+The exact value of this is assigned by VB. DO NOT try to edit these yourself, VB takes care of them (mostly; see comments below about HANDLING FRX DATA).</P></DIR>
+</DIR>
+<P>Close NotePad.</P>
+<P>Note the size of FRX file.</P>
+<P>Now in IDE add an Icon to the form and big pictures to the Image and PictureBox controls.</P>
+<P>Open the frm file in NotePad. Note that there are no references to Icon or Picture in the control definitions, yet.</P>
+<P>Close NotePad.</P>
+<P>Run code. </P>
+<P>Stop code. </P>
+<P>Open the frm file in NotePad. Note the new references to the FRX file.</P>
+<P>Close NotePad.</P>
+<P>Note the new size of FRX file.</P>
+<P>In IDE Delete the Icon, Image and PictureBox Pictures.</P>
+<P>Run code. </P>
+<P>Stop code. </P>
+<P>Open the frm file in NotePad. Note the Icon and Picture references are gone.</P>
+<P>Close NotePad.</P>
+<P>Note the size of FRX file has not changed.</P>
+<P>What's going on? see next section.</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>HANDLING FRX DATA</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>When RichTextBox was added to VB the MS coders wrote new handling routines and it cleans up after itself but the older picture/icon handling was not updated so you need to be aware of the following issues.</P>
+<P>&nbsp;If you delete the image/picture/icon from the IDE the record is NOT destroyed. This means that the FRX may contain an enormous BMP file which you do not (in fact cannot) use. To keep your upload small you need to force VB to rewrite the FRX file. </P>
+<P>There are 2 ways of doing this:</P>
+<B><P>1.</B> If you want to stay in the IDE:</P>
+<P>&#9;Cut the control from the form. </P>
+<P>&#9;Run the code in the IDE (This automatically rewrites the FRX file). </P>
+<P>&#9;Paste the Control back on the Form and delete the picture (before running the code again). </P>
+<P>WARNING Be careful that you don't overwrite the Control in the clipboard while doing this by sending something else to the clipboard.</P>
+<B><P>2.</B> If you are happy to jump between IDE and Explorer:</P>
+<P>&#9;Delete the picture/icon in the IDE. </P>
+<P>&#9;Manually delete the FRX file in Explorer. </P>
+<P>&#9;Run the code in the IDE (This automatically rewrites the FRX file).</P>
+<P>NOTE: If you replace the image/picture/icon from the IDE it replaces the previous data and VB updates the FRX file automatically, you don't need to do anything.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>SO WHY UPLOAD FRX FILES?</P>
+<OL>
+</B></FONT><FONT FACE="Arial" SIZE=2><LI>It looks more professional:</LI>
+<P>If you don't upload the FRX file then VB generates a loading error and creates a log file with contents something like this</P>
+<P>&#9;'Line 9: Property Icon in frmAddIn had an invalid file reference.' </P>
+<P>&#9;Where Line 9 is the line in the frm file and Icon is looking for the FRX file named in the value.</P>
+<P>NOTE this is line number of actual file, NOT what is displayed in the IDE.
+<P>This bugs anyone downloading your code and probably frightens new coders off immediately.</P>
+<P>
+Also if you supply the graphic files but not the FRX file it may not be clear which graphic goes into which control and VB certainly won't know anything about them anyway.
+<P>&nbsp;</P>
+<LI>Security:</LI></OL>
+<DIR>
+<DIR>
+<P>If a graphic is in an FRX file you don't need to supply the original and end users cannot change (and mess up your code) easily.
+ </P></DIR>
+</DIR>
+<P>&nbsp;</P>
+<P>&nbsp;&copy; 2003 Roger Gilchrist</P>
+<P>e-mail: rojagilkrist@hotmail.com</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>LATE NEWS</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Despite what I said above about not being able to access images stored in the FRX file a very clever coder has found a way. This even works for images deleted from the IDE but still in the file. Unfortunately his name (I remember his author's picture so yes he is a he) is not in the code but just go to following at PSC to download it.</P>
+<P>'Images from frx' at <P>http://www.Planet-Source-Code.com/vb/scripts/ShowCode.asp?txtCodeId=43419&amp;lngWId=1</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT>
+
